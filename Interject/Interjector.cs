@@ -27,6 +27,6 @@ public class Interjector : IInterjector
             .Reverse()
             .Aggregate((InerjectionContinuationDelegate<TResponse>)HandleAsync, (next, behavior) => () => behavior.Handle(request, next, ct));
         
-        return default;
+        return await pipelines();
     }
 }

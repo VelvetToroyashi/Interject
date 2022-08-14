@@ -15,9 +15,14 @@ public static class ServiceCollectionExtensions
             .SelectMany(a => a.DefinedTypes)
             .Where(t => t.IsClass && !t.IsAbstract)
             .Where(dt => dt.ImplementedInterfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRequestHandler<,>)));
-        
+
         foreach (var handler in handlers)
-            services.TryAdd(ServiceDescriptor.Describe(typeof(IRequestHandler<,>), handler, lifetime));
+        {
+            var handlerInterfaces = handler.ImplementedInterfaces.Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRequestHandler<,>));
+            
+            foreach (var handlerInterface in handlerInterfaces) 
+                services.Add(ServiceDescriptor.Describe(handlerInterface, handler, lifetime));
+        }
 
         return services;
     }
