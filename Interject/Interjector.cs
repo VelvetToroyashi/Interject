@@ -25,7 +25,7 @@ public class Interjector : IInterjector
         var pipelines = services
             .GetServices<IPipelineBehavior<IRequest<TResponse>, TResponse>>()
             .Reverse()
-            .Aggregate((InerjectionContinuationDelegate<TResponse>)HandleAsync, (next, behavior) => () => behavior.Handle(request, next, ct));
+            .Aggregate((InterjectionContinuationDelegate<TResponse>)HandleAsync, (next, behavior) => () => behavior.Handle(request, next, ct));
         
         return await pipelines();
     }

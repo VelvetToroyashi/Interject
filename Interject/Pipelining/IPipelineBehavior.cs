@@ -2,9 +2,9 @@
 
 namespace Interject.Pipelining;
 
-public delegate Task<TResponse> InerjectionContinuationDelegate<TResponse>();
+public delegate Task<TResponse> InterjectionContinuationDelegate<TResponse>();
 
 public interface IPipelineBehavior<in TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
-    Task<TResponse> Handle(TRequest request, InerjectionContinuationDelegate<TResponse> next, CancellationToken cancellationToken);
+    Task<TResponse> Handle(TRequest request, InterjectionContinuationDelegate<TResponse> next, CancellationToken cancellationToken);
 }
