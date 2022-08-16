@@ -7,7 +7,7 @@ namespace Interject.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddInterject(this ServiceCollection services, ServiceLifetime lifetime, params Assembly[] assemblies)
+    public static IServiceCollection AddInterject(this IServiceCollection services, ServiceLifetime lifetime, params Assembly[] assemblies)
     {
         services.TryAdd(ServiceDescriptor.Describe(typeof(IInterjector), typeof(Interjector), lifetime));
 
